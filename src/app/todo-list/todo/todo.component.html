@@ -2,17 +2,21 @@
 <div class="container">
   <h2>Todo List</h2>
 
-  <!-- Formulaire d'ajout de tâche -->
   <div class="todo-form">
     <div class="input-group">
       <input [(ngModel)]="newTaskTitle" placeholder="Titre de la tâche"  (keydown.enter)="addTask()"/>
       <input [(ngModel)]="newTaskAuthor" placeholder="Auteur" (keydown.enter)="addTask()"/>
-      <input [(ngModel)]="newTaskTags" placeholder="Tags (séparés par des virgules)"(keydown.enter)="addTask()" />
+      <input [(ngModel)]="newTaskTags" placeholder="Tags"(keydown.enter)="addTask()" />
       <button (click)="addTask()">Ajouter</button>
     </div>
   </div>
 
-  <!-- Liste des tâches -->
+ <div class="divBtn" *ngIf="tasks.length > 0">
+  <button *ngIf="tasks.length > 0" class="btn-delet" (click)="toggleAllTasks()">Tout cocher</button>
+<button *ngIf="tasks.length > 0" class="btn-delet" (click)="clearCompletedTasks()">Tout Supprimer</button>
+
+</div>
+
   <div class="tasksDiv">
     <ul>
       <li *ngFor="let task of tasks; trackBy: trackTaskById" class="task-list-item">
@@ -27,7 +31,5 @@
       </li>
     </ul>
   </div>
-    <button class="btn-delet" (click)="clearCompletedTasks()">Tout Supprimer</button>
 </div>
-
 </div>
