@@ -1,0 +1,33 @@
+<div class="body">
+<div class="container">
+  <h2>Todo List</h2>
+
+  <!-- Formulaire d'ajout de tâche -->
+  <div class="todo-form">
+    <div class="input-group">
+      <input [(ngModel)]="newTaskTitle" placeholder="Titre de la tâche"  (keydown.enter)="addTask()"/>
+      <input [(ngModel)]="newTaskAuthor" placeholder="Auteur" (keydown.enter)="addTask()"/>
+      <input [(ngModel)]="newTaskTags" placeholder="Tags (séparés par des virgules)"(keydown.enter)="addTask()" />
+      <button (click)="addTask()">Ajouter</button>
+    </div>
+  </div>
+
+  <!-- Liste des tâches -->
+  <div class="tasksDiv">
+    <ul>
+      <li *ngFor="let task of tasks; trackBy: trackTaskById" class="task-list-item">
+        <div class="left-part">
+          <div class="custom-checkbox" [ngClass]="{ 'checked': task.completed }" (click)="toggleCompletion(task)"></div>
+          <span [ngClass]="{ 'completed': task.completed }">
+            {{ task.title }} - {{ task.author }}
+            <small *ngIf="task.tags.length">[{{ task.tags.join(', ') }}]</small>
+          </span>
+        </div>
+        <button (click)="deleteTask(task.id)">🗑️</button>
+      </li>
+    </ul>
+  </div>
+    <button class="btn-delet" (click)="clearCompletedTasks()">Tout Supprimer</button>
+</div>
+
+</div>
